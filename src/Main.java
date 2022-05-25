@@ -106,8 +106,8 @@ public class Main {
 
         // Punto 8: InputStream, PrintStream
 
-        String fileIn = "src\\ficheros\\origen.txt";
-        String fileOut = "src\\ficheros\\destino.txt";
+        String fileIn = "lib\\origen.txt";
+        String fileOut = "lib\\destino.txt";
         try {
             copyFile(fileIn, fileOut);
             System.out.println("El archivo ha sido copiado");
