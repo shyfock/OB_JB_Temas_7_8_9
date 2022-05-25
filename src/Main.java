@@ -1,8 +1,13 @@
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Vector;
 
-public class App {
+public class Main {
     public static void main(String[] args) {
         // Imprime texto invertido
         System.out.println(reverse("Hola Mundo"));
@@ -66,10 +71,7 @@ public class App {
         nombres.add(2, "Joaquin");
         nombres.add(3, "Milena");
 
-        LinkedList<String> nombresLink = new LinkedList<>();
-        for (String nombre : nombres) {
-            nombresLink.add(nombre);
-        }
+        LinkedList<String> nombresLink = new LinkedList<>(nombres);
 
         for (String nombre : nombresLink) {
             System.out.println(nombre);
@@ -78,6 +80,41 @@ public class App {
         for (String nombre : nombres) {
             System.out.println(nombre);
         }
+
+        // Punto 6: ArryList de números
+        ArrayList<Integer> numeros = new ArrayList<>();
+        // bucle for para rellenar ArrayList con enteros 1..10
+        for (int i = 0; i < 10; i++) {
+            numeros.add(i, i + 1);
+        }
+        // bucle for para borrar números pares
+        for (int i = 0; i < numeros.size(); i++) {
+            if (numeros.get(i) % 2 == 0) {
+                numeros.remove(numeros.get(i));
+            }
+        }
+        System.out.println(numeros);
+
+        // Punto 7: Función DividePorCero
+        try {
+            DividePorCero(0);
+        } catch (Exception e) {
+            System.out.println("Esto no puede hacerse");
+        } finally {
+            System.out.println("Demo de código");
+        }
+
+        // Punto 8: InputStream, PrintStream
+
+        String fileIn = "src\\ficheros\\origen.txt";
+        String fileOut = "src\\ficheros\\destino.txt";
+        try {
+            copyFile(fileIn, fileOut);
+            System.out.println("El archivo ha sido copiado");
+        } catch (IOException e) {
+            System.out.println("Mensaje: " + e.getMessage() + "\n" + "El archivo no se ha copiado");
+        }
+
     }
 
     // Función reverse()
@@ -88,5 +125,22 @@ public class App {
             cadenaReverse += textoArray[textoArray.length - 1 - i];
         }
         return cadenaReverse;
+    }
+
+    // Función DividePorCero()
+    public static void DividePorCero(int number) throws ArithmeticException {
+        int resultado = 100 / number;
+        System.out.println("El resultado es: " + resultado);
+
+    }
+
+    // Función InputStream PrintStream
+    public static void copyFile(String fileIn, String fileOut) throws IOException {
+        InputStream file1 = new FileInputStream(fileIn);
+        byte[] datos = file1.readAllBytes();
+        PrintStream file2 = new PrintStream(fileOut);
+        file2.write(datos);
+        file1.close();
+        file2.close();
     }
 }
